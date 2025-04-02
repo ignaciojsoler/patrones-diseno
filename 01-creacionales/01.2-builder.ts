@@ -70,16 +70,12 @@ class QueryBuilder {
   }
 
   execute(): string {
-    // Select id, name, email from users where age > 18 and country = 'Cri' order by name ASC limit 10;
-    return `Select ${this.fields.length ? this.fields.join(", ") : "*"} from ${
-      this.table
-    } where ${
-      this.conditions.join(" AND ")
-    } ${
-      this.orderFields.length && 'order by ' + this.orderFields.join(' ')
-    } ${
-      !!this.limitCount && 'limit ' + this.limitCount
-    };`;
+    const fields = this.fields.length ? this.fields.join(", ") : "*";
+    const conditions = this.conditions.join(" AND ");
+    const orderBy = this.orderFields.length ? `ORDER BY ${this.orderFields.join(" ")}` : "";
+    const limit = this.limitCount ? `LIMIT ${this.limitCount}` : "";
+  
+    return `SELECT ${fields} FROM ${this.table} WHERE ${conditions} ${orderBy} ${limit};`.trim();
   }
 }
 
