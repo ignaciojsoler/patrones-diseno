@@ -13,21 +13,25 @@
  *
  */
 
-import { COLORS } from "../helpers/colors";
-
 interface Hamburger {
   prepare(): void;
 }
 
 class ChikenHamburger implements Hamburger {
   prepare(): void {
-    console.log('Preparando una hamburguesa de %cpollo.', COLORS.yellow);
+    console.log('Preparando una hamburguesa de pollo.');
   }
 }
 
 class BeefHamburger implements Hamburger {
   prepare(): void {
-    console.log('Preparando una hamburguesa de %cpollo.', COLORS.yellow);
+    console.log('Preparando una hamburguesa de carne.');
+  }
+}
+
+class BeanHamburger implements Hamburger {
+  prepare(): void {
+    console.log('Preparando una hamburguesa de frijol.');
   }
 }
 
@@ -51,3 +55,33 @@ class BeefRestaurant extends Restaurant {
     return new BeefHamburger();
   }
 }
+
+class VeganRestaurant extends Restaurant {
+  override createHamburger(): Hamburger {
+    return new BeanHamburger();
+  }
+}
+
+function main() {
+  let restaurant: Restaurant;
+
+  const burgerType = prompt('¿Qué tipo de hamburguesa querés? (chicken/beef/bean)');
+
+  switch(burgerType) {
+    case 'chicken':
+      restaurant = new ChikenRestaurant();
+      break;
+    case 'beef':
+      restaurant = new BeefRestaurant();
+      break;
+    case 'bean':
+      restaurant = new VeganRestaurant();
+      break;
+    default:
+      throw new Error('Opción no válida');
+  }
+
+  restaurant.orderHamburger();
+}
+
+main();
