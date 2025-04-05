@@ -24,12 +24,18 @@ class Player {
   readonly level: number;
 
   constructor(name: string, score: number, level: number) {
-    throw new Error('Method not implemented.');
+    this.name = name;
+    this.score = score;
+    this.level = level;
   }
 
   // Método copyWith para crear una copia modificada del jugador
   copyWith({ name, score, level }: Partial<Player>): Player {
-    throw new Error('Method not implemented.');
+    return new Player(
+      name ?? this.name,
+      score ?? this.score,
+      level ?? this.level
+    )
   }
 
   displayState(): void {
@@ -42,7 +48,7 @@ class Player {
 // 2. Código Cliente para probar
 function main() {
   // Crear jugador inicial
-  let player = new Player('Carlos', 0, 1);
+  let player = new Player('Simon', 0, 1);
   console.log('Estado inicial:');
   player.displayState();
 
@@ -57,7 +63,7 @@ function main() {
   player.displayState();
 
   // Cambiar el nombre del jugador
-  player = player.copyWith({ name: 'Carlos Pro' });
+  player = player.copyWith({ name: 'Simon Pro' });
   console.log('\nDespués de cambiar el nombre:');
   player.displayState();
 }
