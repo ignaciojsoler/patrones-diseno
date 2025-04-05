@@ -17,13 +17,17 @@ class Pokemon {
   attacks: string[];
 
   constructor(name: string, type: string, level: number, attacks: string[]) {
-    throw new Error('Method not implemented.');
+    this.name = name;
+    this.type = type;
+    this.level = level;
+    this.attacks = attacks;
   }
 
   // Método para clonar el Pokémon
   clone(): Pokemon {
     // Los ataques deben de evitar pasarse por referencia, es decir, no deben de ser el mismo arreglo.
     // Completar: Debe devolver un nuevo Pokémon con los mismos atributos
+    return new Pokemon(this.name, this.type, this.level, this.attacks);
   }
 
   displayInfo(): void {
@@ -34,6 +38,18 @@ class Pokemon {
     );
   }
 }
+
+function main() {
+  const basePokemon: Pokemon = new Pokemon('Joltik', 'Garrapata', 1, ['Prendición']);
+  basePokemon.displayInfo();
+  const evolutionPokemon = basePokemon.clone()
+  evolutionPokemon.name = "Chihuahua";
+  evolutionPokemon.level = 2;
+  evolutionPokemon.attacks.push('Drama');
+  evolutionPokemon.displayInfo();
+}
+
+main();
 
 // Tarea:
 // 1. Crear un Pokémon base.
